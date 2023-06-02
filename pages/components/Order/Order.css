@@ -1,0 +1,16 @@
+.order-container *{
+     color: white;
+}
+.order-container p{
+     font-weight: 500;
+}
+
+.order-container .delete-btn{
+     transform: scale(1.3);
+     color:rgb(255, 255, 255);
+     background-color: rgb(225, 141, 141);
+}
+.order-container .delete-btn:hover{
+     transform: scale(1.4);
+     opacity: 0.8;
+}

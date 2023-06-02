@@ -1,0 +1,24 @@
+.admin-page{
+     display: flex;
+     min-height: 100vh;
+}
+.admin-page .side-bar{
+     flex:1;
+}
+.admin-page .side-bar p{
+     font-size: 1.3rem;
+     font-weight: 400;
+     text-align: center;
+     height: 2rem;
+     background-color: rgb(180, 161, 161);
+     color: white;
+}
+.admin-page .side-bar p:hover{
+     transform: scale(1.05);
+     opacity: 0.8;
+}
+.admin-page .main-container{
+     flex:6;
+     margin-left: 3rem;
+     margin-top: 3rem;
+}

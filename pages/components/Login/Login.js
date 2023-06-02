@@ -1,6 +1,8 @@
 import {useState} from "react"
+import { useRouter } from 'next/router';
 
 const Login = () => {
+    const router = useRouter();
     const [username,setUsername] = useState("")
     const [password,setPassword] = useState("")
     const [alert,setAlert] = useState(false)
@@ -8,7 +10,7 @@ const Login = () => {
     function handleLogin(e){
       e.preventDefault()
       if (username == "admin" && password=="admin"){
-
+        router.push('/components/AdminPage/AdminPage')
       }else{
         setAlert(true);
       }
