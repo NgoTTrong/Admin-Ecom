@@ -4,6 +4,8 @@
 }
 .admin-page .side-bar{
      flex:1;
+     border-right: 1px solid #fff;
+     box-shadow: #fff;
 }
 .admin-page .side-bar p{
      font-size: 1.3rem;
@@ -16,6 +18,7 @@
 .admin-page .side-bar p:hover{
      transform: scale(1.05);
      opacity: 0.8;
+     cursor: pointer;
 }
 .admin-page .main-container{
      flex:6;

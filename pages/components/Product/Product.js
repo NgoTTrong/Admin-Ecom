@@ -42,7 +42,7 @@ const Product = () => {
         ]
      return (  
           <div className="product-container">
-               <p>Product management</p>
+               <p className="title">Product management</p>
                <button className="insert-btn" onClick={(e)=>{
                     e.preventDefault();
                     setEnableForm(true);

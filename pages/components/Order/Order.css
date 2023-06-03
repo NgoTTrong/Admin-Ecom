@@ -1,8 +1,9 @@
 .order-container *{
      color: white;
 }
-.order-container p{
+.order-container .title{
      font-weight: 500;
+     font-size: 2rem;
 }
 
 .order-container .delete-btn{
@@ -13,4 +14,5 @@
 .order-container .delete-btn:hover{
      transform: scale(1.4);
      opacity: 0.8;
+     cursor: pointer;
 }

@@ -2,8 +2,10 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 
 const InsertForm = ({setEnableForm}) => {
+     const [fileUpload,setFileUpload] = useState(null)
      const router = useRouter()
   const formik = useFormik({
     initialValues: {
@@ -18,7 +20,7 @@ const InsertForm = ({setEnableForm}) => {
         .required("Required")
         .min(4, "Must be 4 characters or more"),
       description: Yup.string(),
-      thumbnailurl: Yup.string().required("Required"),
+      thumbnailurl: Yup.mixed(),
       baseprice: Yup.number().required("Required"),
       discountprice: Yup.mixed().test(
         "isSmaller",
@@ -30,8 +32,18 @@ const InsertForm = ({setEnableForm}) => {
       ),
     }),
     onSubmit: async (values) => {
-          try{
-               await axios.post(process.env.NEXT_PUBLIC_HOST+"/product/insert",{productInfo: values})
+          try{ 
+               console.log(values);
+               console.log(fileUpload)
+               const {thumbnailurl,...rest} = values
+               const formData = new FormData();
+               formData.append("file", fileUpload);
+               formData.append("productInfo",JSON.stringify(rest))
+               await axios.post(process.env.NEXT_PUBLIC_HOST+"/product/insert",formData,{
+                    headers: {
+                      'Content-Type': 'multipart/form-data'
+                    }
+                })
                window.alert("Insert product successful");
                router.reload(window.location.pathname)
           } catch(e) {
@@ -71,19 +83,24 @@ const InsertForm = ({setEnableForm}) => {
         {formik.errors.description && (
           <p className="errorMsg"> {formik.errors.description} </p>
         )}
-        <label> Thumbnail url </label>
+        <label> Thumbnail </label>
+        {
+          fileUpload && <p>{fileUpload.name}</p>
+        }
         <input
-          type="text"
+          type="file"
           id="thumbnailurl"
           name="thumbnailurl"
+          accept="image/*"
           value={formik.values.thumbnailurl}
-          onChange={formik.handleChange}
-          placeholder="Enter Thumbnail url"
+          onChange={event=>{
+               setFileUpload(event.target.files[0])
+          }}
         />
         {formik.errors.thumbnailurl && (
           <p className="errorMsg"> {formik.errors.thumbnailurl} </p>
         )}
-        <label> Base price </label>
+        <label> Base price $ </label>
         <input
           type="text"
           id="baseprice"
@@ -95,14 +112,14 @@ const InsertForm = ({setEnableForm}) => {
         {formik.errors.baseprice && (
           <p className="errorMsg"> {formik.errors.baseprice} </p>
         )}
-        <label> Discount price </label>
+        <label> Discount price $ </label>
         <input
           type="text"
           id="discountprice"
           name="discountprice"
           value={formik.values.discountprice}
           onChange={formik.handleChange}
-          placeholder="Enter your phone numbers"
+          placeholder="Enter discount price"
         />
         {formik.errors.discountprice && (
           <p className="errorMsg"> {formik.errors.discountprice} </p>

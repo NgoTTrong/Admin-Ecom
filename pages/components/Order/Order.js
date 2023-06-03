@@ -36,7 +36,7 @@ const Order = () => {
         ]
      return (  
           <div className="order-container">
-               <p>Order management</p>
+               <p className="title">Order management</p>
                <DataGrid
                     rows={orders}
                     columns={columns}
