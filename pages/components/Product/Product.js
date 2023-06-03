@@ -10,7 +10,6 @@ const Product = () => {
      const [enableForm, setEnableForm] = useState(false)
      useEffect(()=>{
           const fetchData = async ()=>{
-               console.log(process.env.NEXT_PUBLIC_HOST+"/product")
                let fetchedProducts = await axios.get(process.env.NEXT_PUBLIC_HOST+"/product")  
                console.log(fetchedProducts)
                setProducts(fetchedProducts.data)
@@ -19,8 +18,8 @@ const Product = () => {
      },[])
      const columns = [
           { field: 'id', headerName: 'ID' },
-          { field: 'name', headerName: 'Name', width: 100 },
-          { field: 'thumbnailurl', headerName: 'Thumbnail', width: 200 },
+          { field: 'name', headerName: 'Name', width: 150 },
+          { field: 'thumbnailurl', headerName: 'Thumbnail', width: 150,renderCell: (params) => <img src={params.value} />, },
           { field: 'description', headerName: 'Description', width: 300 },
           { field: 'baseprice', headerName: 'Base price', width: 150 },
           { field: 'discountprice', headerName: 'Discount price', width: 150 },
@@ -50,18 +49,17 @@ const Product = () => {
                {
                     enableForm && <InsertForm setEnableForm={setEnableForm}/>
                }
-               
-               
-               <DataGrid
+               <DataGrid className="product-table"
                     rows={products}
                     columns={columns}
                     initialState={{
                     pagination: {
-                         paginationModel: { page: 0, pageSize: 5 },
+                         paginationModel: { page: 0, pageSize: 3 },
                     },
                     }}
                     pageSizeOptions={[5, 10]}
                     checkboxSelection
+                    getRowHeight={() => 100}
                />
           </div>
      );

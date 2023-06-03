@@ -6,6 +6,7 @@
      flex:1;
      border-right: 1px solid #fff;
      box-shadow: #fff;
+     margin: 0 10px;
 }
 .admin-page .side-bar p{
      font-size: 1.3rem;
@@ -14,6 +15,8 @@
      height: 2rem;
      background-color: rgb(180, 161, 161);
      color: white;
+     border-radius: 5px;
+     margin-top: 3rem;
 }
 .admin-page .side-bar p:hover{
      transform: scale(1.05);
