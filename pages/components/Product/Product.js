@@ -26,7 +26,7 @@ const Product = () => {
       field: "thumbnailurl",
       headerName: "Thumbnail",
       width: 150,
-      renderCell: (params) => <Image src={params.value} alt="product" />,
+      renderCell: (params) => <img src={params.value} alt="product" />,
     },
     { field: "description", headerName: "Description", width: 300 },
     { field: "baseprice", headerName: "Base price", width: 150 },
