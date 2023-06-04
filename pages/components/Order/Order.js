@@ -21,6 +21,7 @@ const Order = () => {
     { field: "phonenumber", headerName: "Phone", width: 100 },
     { field: "email", headerName: "Email", width: 250 },
     { field: "buyeraddress", headerName: "Address", width: 250 },
+    { field: "totalpaid", headerName: "Total paid", width: 100 },
     {
       field: "actions",
       headerName: "Actions",
