@@ -1,12 +1,12 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useRouter } from "next/router";
+import { useState } from "react";
 
-const InsertForm = ({setEnableForm}) => {
-     const [fileUpload,setFileUpload] = useState(null)
-     const router = useRouter()
+const InsertForm = ({ setEnableForm }) => {
+  const [fileUpload, setFileUpload] = useState(null);
+  const router = useRouter();
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -32,32 +32,40 @@ const InsertForm = ({setEnableForm}) => {
       ),
     }),
     onSubmit: async (values) => {
-          try{ 
-               console.log(values);
-               console.log(fileUpload)
-               const {thumbnailurl,...rest} = values
-               const formData = new FormData();
-               formData.append("file", fileUpload);
-               formData.append("productInfo",JSON.stringify(rest))
-               await axios.post(process.env.NEXT_PUBLIC_HOST+"/product/insert",formData,{
-                    headers: {
-                      'Content-Type': 'multipart/form-data'
-                    }
-                })
-               window.alert("Insert product successful");
-               router.reload(window.location.pathname)
-          } catch(e) {
-               window.alert("Insert product fail");
+      try {
+        console.log(values);
+        console.log(fileUpload);
+        const { thumbnailurl, ...rest } = values;
+        const formData = new FormData();
+        formData.append("file", fileUpload);
+        formData.append("productInfo", JSON.stringify(rest));
+        await axios.post(
+          process.env.NEXT_PUBLIC_HOST + "/product/insert",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
           }
-
+        );
+        window.alert("Insert product successful");
+        router.reload(window.location.pathname);
+      } catch (e) {
+        window.alert("Insert product fail");
+      }
     },
   });
   return (
     <div className="form-container">
-     <p className="close-form" onClick={(e)=>{
+      <p
+        className="close-form"
+        onClick={(e) => {
           e.preventDefault();
           setEnableForm(false);
-     }}>X</p>
+        }}
+      >
+        X
+      </p>
       <form className="insert-data-form" onSubmit={formik.handleSubmit}>
         <label> Product name </label>
         <input
@@ -72,29 +80,29 @@ const InsertForm = ({setEnableForm}) => {
           <p className="errorMsg"> {formik.errors.name} </p>
         )}
         <label> Description </label>
-        <textarea 
-        id="description"
-         name="description" rows="4" 
-         cols="50"
-        value={formik.values.description}
+        <textarea
+          id="description"
+          name="description"
+          rows="4"
+          cols="50"
+          value={formik.values.description}
           onChange={formik.handleChange}
-          placeholder="Enter description"></textarea>
-        
+          placeholder="Enter description"
+        ></textarea>
+
         {formik.errors.description && (
           <p className="errorMsg"> {formik.errors.description} </p>
         )}
         <label> Thumbnail </label>
-        {
-          fileUpload && <p>{fileUpload.name}</p>
-        }
+        {fileUpload && <p>{fileUpload.name}</p>}
         <input
           type="file"
           id="thumbnailurl"
           name="thumbnailurl"
           accept="image/*"
           value={formik.values.thumbnailurl}
-          onChange={event=>{
-               setFileUpload(event.target.files[0])
+          onChange={(event) => {
+            setFileUpload(event.target.files[0]);
           }}
         />
         {formik.errors.thumbnailurl && (
