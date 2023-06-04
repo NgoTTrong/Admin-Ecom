@@ -10,10 +10,15 @@ This is a simple E-commerce website that includes an admin dashboard for managin
 
 ## Features
 - Login Page
+
     • Using admin account to log in page:
+    
         ◦ username: admin
+        
         ◦ password: admin
+        
     • After inputting the data, click log in button to go to main page
+
 - Admin Dashboard Page
 
 Add Products
