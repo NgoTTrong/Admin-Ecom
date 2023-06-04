@@ -1,3 +1,7 @@
+## Deloyment
+- The web application is deployed at: (https://admin-ecom-kappa.vercel.app)
+- Use admin account: username = admin, password = admin
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
